@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<link rel="stylesheet" type="text/css" href="styles.css" >-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+
+        #logo {
+            float: left;
+            margin-right: 10px;
+            font-size: 1.7em;
+            /*color: #fff;*/
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            padding-top: 9px;
+            font-weight: bold;
+        }
+
+        #logo:hover {
+            /*color: #fff;*/
+            text-decoration: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <a href="welcome.html" id="logo">BOOK MANAGEMENT</a>
+            <nav>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.html">LOGIN</a> </li>
+                    <li><a href="register.html">REGISTER</a> </li>
+                    <li><a href="uploadfile.jsp">UPLOAD FILE</a> </li>
+                </ul>
+            </nav>
+
+        </div>
+
+    </header>
+    <br><br>
+    <h3>Login with email and password</h3>
+    <form action="Login" method="post">
+        <strong>User Email </strong>:   <input type="text" name="email">
+        <br>
+        <strong>Password </strong>:     <input type="password" name="password">
+        <br>
+        <input type="submit" value="Login">
+    </form>
+    <br>
+
+    If you are new user, please <a href="register.html">Register</a>
+
+    <form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+        Select File to Upload : <input type="file" name="filename">
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+
+    <br><br><br>
+
+    <form action="UserInformation" method="post">
+        <input type="submit" value="UserInformation">
+    </form>
+
+    <br><br><br>
+
+    <form action="UsersFilter" method="post">
+        <strong>Find something : </strong> <input type="text" name="search" placeholder="Search...">
+    </form>
+
+    <br><br><br>
+
+</body>
+</html>
