@@ -65,7 +65,7 @@
 
     <%--<br><br>--%>
 
-    Ready to come back? Just click <a href="login.html">Login</a>
+    Ready to come back? Just click <a href="html/login.html">Login</a>
 
 </body>
 </html>

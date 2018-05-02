@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: hung.levanviet
+  Date: 5/2/2018
+  Time: 1:55 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +18,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <style>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <style type="text/css">
 
         /* universal */
 
@@ -179,36 +189,37 @@
             font-size: 20px;
         }
     </style>
-    <meta charset="UTF-8">
-    <title>Login Page</title>
 </head>
 <body>
-<header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container content">
-        <a href="welcome.html" id="logo">BOOK MANAGEMENT</a>
-        <nav>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.html">LOGIN</a> </li>
-                <li><a href="register.html">REGISTER</a> </li>
-                <li><a href="usersfilter.html">MANAGE USERS</a> </li>
-            </ul>
-        </nav>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container content">
+            <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
+            <nav>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.jsp">LOGIN</a> </li>
+                    <li><a href="register.jsp">REGISTER</a> </li>
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <h1>Sign up</h1>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="Register" method="post">
+                <label>Email ID :</label><input type="text" name="email"><br>
+                <label>Name :</label><input type="text" name="name"><br>
+                <label>Country :</label><input type="text" name="country"><br>
+                <label>Password :</label><input type="password" name="password"><br>
+                <label>Confirm Password :</label><input type="password" name="confirmPassword">
+                <br><br><br>
+                <input type="submit" value="Register" class="btn btn-lg btn-primary">
+
+            </form>
+            <br>
+            <h4>If you are registered user, please <a href="html/login.html">Login</a></h4>
+        </div>
     </div>
-</header>
-
-<br><br><br>
-
-<h1>Login</h1>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form action="Login" method="post">
-            <label>User Email : </label><input type="text" name="email">
-
-            <label>Password : </label><input type="password" name="password">
-            <br><br><br>
-            <input type="submit" value="Login" class="btn btn-lg btn-primary">
-        </form>
-    </div>
-</div>
 </body>
 </html>

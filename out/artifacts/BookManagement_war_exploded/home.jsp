@@ -223,12 +223,12 @@
 <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container content">
-            <a href="welcome.html" id="logo">BOOK MANAGEMENT</a>
+            <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
             <nav>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.html">LOGIN</a> </li>
-                    <li><a href="register.html">REGISTER</a> </li>
-                    <li><a href="uploadfile.jsp">UPLOAD FILE</a> </li>
+                    <li><a href="login.jsp">LOGIN</a> </li>
+                    <li><a href="register.jsp">REGISTER</a> </li>
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
                 </ul>
             </nav>
         </div>

@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if(errorMsg != null){
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
             PrintWriter out= response.getWriter();
             out.println("<font color=red>"+errorMsg+"</font>");
             rd.include(request, response);
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("User", user);
                     response.sendRedirect("home.jsp");;
                 }else{
-                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+                    RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
                     PrintWriter out= response.getWriter();
                     logger.error("User not found with email="+email);
                     out.println("<font color=red>No user found with given email id, please register first.</font>");

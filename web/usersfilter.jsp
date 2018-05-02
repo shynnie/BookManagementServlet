@@ -1,15 +1,12 @@
 <%--
   Created by IntelliJ IDEA.
   User: hung.levanviet
-  Date: 4/23/2018
-  Time: 3:45 PM
+  Date: 5/2/2018
+  Time: 2:10 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@page import="com.shyn.util.User"%>
-<%@ page import="java.util.ArrayList" %>
-<%@ page language="java" contentType="text/html; charset=US-ASCII"
-         pageEncoding="US-ASCII"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -191,63 +188,32 @@
             padding-bottom: 10px;
             font-size: 20px;
         }
-
-        /* Table */
-
-        table {
-
-        }
     </style>
 </head>
 <body>
-<header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container content">
-        <a href="welcome.html" id="logo">BOOK MANAGEMENT</a>
-        <nav>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="login.html">LOGIN</a> </li>
-                <li><a href="register.html">REGISTER</a> </li>
-                <li><a href="usersfilter.html">MANAGE USERS</a> </li>
-            </ul>
-        </nav>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container content">
+            <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
+            <nav>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login.jsp">LOGIN</a> </li>
+                    <li><a href="register.jsp">REGISTER</a> </li>
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <h1>Manage Users</h1>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="UsersFilter" method="post">
+                <label>Search</label><input type="text" name="search">
+                <h5>(E.g: name, country, email, id...)</h5>
+                <br><br>
+                <input type="submit" value="search" class="btn btn-lg btn-primary">
+            </form>
+        </div>
     </div>
-</header>
-
-<h1>Manage Users</h1>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form action="UsersFilter" method="post">
-            <label>Search</label><input type="text" name="search">
-            <h5>(E.g: name, country, email, id...)</h5>
-            <br><br>
-            <input type="submit" value="search" class="btn btn-lg btn-primary">
-        </form>
-
-    <br><br>
-
-    <table class="table table-bordered">
-        <tr>
-            <th><label>ID</label></th>
-            <th><label>Name</label></th>
-            <th><label>Country</label></th>
-            <th><label>Country</label>x</th>
-    <%
-        ArrayList<User> userArrayList = (ArrayList<User>) session.getAttribute("filterUsers");
-        int length = userArrayList.size();
-
-    %>
-    <% for (int i = 0; i < length; i++) {%>
-    <tr>
-        <th><%=userArrayList.get(i).getId()%></th>
-        <th><%=userArrayList.get(i).getName()%></th>
-        <th><%=userArrayList.get(i).getCountry()%></th>
-        <th><%=userArrayList.get(i).getEmail()%></th>
-    </tr>
-    <%}%>
-    </table>
-
-    </div>
-</div>
-
 </body>
 </html>

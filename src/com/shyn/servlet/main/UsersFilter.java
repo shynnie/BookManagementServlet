@@ -39,7 +39,7 @@ public class UsersFilter extends HttpServlet {
         }
 
         if (errorMsg != null) {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/usersfilter.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/usersfilter.jsp");
             PrintWriter out = response.getWriter();
             out.println("<font color = red>" + errorMsg + "</font>");
             rd.include(request, response);
@@ -73,7 +73,7 @@ public class UsersFilter extends HttpServlet {
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("filterUsers", filterUsers);
-                response.sendRedirect("usersfilter.jsp");
+                response.sendRedirect("usersfilter2.jsp");
             }
             catch (Exception e){
                 e.printStackTrace();
