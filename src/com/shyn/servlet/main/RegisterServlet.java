@@ -25,18 +25,30 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String country = request.getParameter("country");
+        String confirmPassword = request.getParameter("confirmPassword");
         String errorMsg = null;
+        logger.info("password :::: " + password + " :::");
+        logger.info("confirmPassword :::: " + confirmPassword + " :::");
         if(email == null || email.equals("")){
             errorMsg = "Email ID can't be null or empty.";
-        }
-        if(password == null || password.equals("")){
-            errorMsg = "Password can't be null or empty.";
         }
         if(name == null || name.equals("")){
             errorMsg = "Name can't be null or empty.";
         }
         if(country == null || country.equals("")){
             errorMsg = "Country can't be null or empty.";
+        }
+        if(password == null || password.equals("")){
+            errorMsg = "Password can't be null or empty.";
+        }
+        else if (password.length() < 6) {
+            errorMsg = "Password is too short (Minimum is 6 characters).";
+        }
+        if(confirmPassword == null || confirmPassword.equals("")){
+            errorMsg = "Confirm Password can't be null or empty.";
+        }
+        else if (!confirmPassword.equals(password)) {
+            errorMsg = "Confirm Password is different Password.";
         }
 
         if(errorMsg != null){

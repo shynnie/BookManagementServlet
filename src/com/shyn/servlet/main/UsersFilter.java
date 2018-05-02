@@ -39,7 +39,7 @@ public class UsersFilter extends HttpServlet {
         }
 
         if (errorMsg != null) {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/usersfilter.html");
             PrintWriter out = response.getWriter();
             out.println("<font color = red>" + errorMsg + "</font>");
             rd.include(request, response);
