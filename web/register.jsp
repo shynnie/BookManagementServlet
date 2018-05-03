@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.shyn.util.User" %><%--
   Created by IntelliJ IDEA.
   User: hung.levanviet
   Date: 5/2/2018
@@ -191,15 +191,41 @@
     </style>
 </head>
 <body>
+    <%--Load User or Customer--%>
+    <%User user = (User) session.getAttribute("User"); %>
+    <%--Load User or Customer--%>
+
     <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container content">
             <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
             <nav>
+                <%if (user != null) {%>
+                <%if (user.getRole() == 0) {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%} else {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%}%>
+                <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login.jsp">LOGIN</a> </li>
                     <li><a href="register.jsp">REGISTER</a> </li>
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
                 </ul>
+                <%}%>
             </nav>
         </div>
     </header>

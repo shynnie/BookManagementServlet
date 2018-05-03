@@ -22,7 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
-    <title>Manage Users</title>
+    <title>Profile</title>
     <style type="text/css">
 
         /* universal */
@@ -200,54 +200,75 @@
     </style>
 </head>
 <body>
+    <%--Load User or Customer--%>
+    <%User user = (User) session.getAttribute("User"); %>
+    <%--Load User or Customer--%>
+
     <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container content">
             <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
             <nav>
+                <%if (user != null) {%>
+                <%if (user.getRole() == 0) {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%} else {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%}%>
+                <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login.jsp">LOGIN</a> </li>
                     <li><a href="register.jsp">REGISTER</a> </li>
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
                 </ul>
+                <%}%>
             </nav>
         </div>
     </header>
 
-    <h1>Manage Users</h1>
+    <h1>Profile</h1>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form action="UsersFilter" method="post">
-                <label>Search</label><input type="text" name="search">
-                <h5>(E.g: name, country, email, id...)</h5>
-                <br><br>
-                <input type="submit" value="search" class="btn btn-lg btn-primary">
-            </form>
 
-        <br><br>
+            <div class="col-md-2 col-md-offset-3">
+                <label>Email :</label><br>
+                <label>Name :</label><br>
+                <label>Country :</label><br>
+            </div>
 
-        <table class="table table-bordered">
-            <tr>
-                <th><label>ID</label></th>
-                <th><label>Name</label></th>
-                <th><label>Country</label></th>
-                <th><label>Email</label></th>
-        <%
-            ArrayList<User> userArrayList = (ArrayList<User>) session.getAttribute("filterUsers");
-            int length = userArrayList.size();
-
-        %>
-        <% for (int i = 0; i < length; i++) {%>
-        <tr>
-            <th><%=userArrayList.get(i).getId()%></th>
-            <th><%=userArrayList.get(i).getName()%></th>
-            <th><%=userArrayList.get(i).getCountry()%></th>
-            <th><%=userArrayList.get(i).getEmail()%></th>
-        </tr>
-        <%}%>
-        </table>
-
-        </div>
+        <%--<%User profile = (User) session.getAttribute("profileView"); %>--%>
+        <%--<%if (profile == null) {%>--%>
+            <div class="col-md-6">
+                <label><%=user.getEmail()%></label><br>
+                <label><%=user.getName()%></label><br>
+                <label><%=user.getCountry()%></label><br>
+            </div>
+        <%--<%} else {%>--%>
+            <%--<div class="col-md-6">            <h1>aaaaa</h1>--%>
+                <%--<label><%=profile.getEmail()%></label><br>--%>
+                <%--<label><%=profile.getName()%></label><br>--%>
+                <%--<label><%=profile.getCountry()%></label><br>--%>
+            <%--</div>--%>
+        <%--<%}%>--%>
+        <form action="ProfileView" method="post">
+            <div class="col-md-4 col-md-offset-4">
+                <input type="hidden" name="id" value="<%=user.getId()%>">
+                <br><br><br>
+                <input type="submit" value="Edit Profile" class="btn btn-lg btn-primary">
+            </div>
+        </form>
     </div>
-
 </body>
 </html>

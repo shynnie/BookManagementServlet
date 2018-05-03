@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = null;
             try {
                 ps = con.prepareStatement("" +
-                        "select id, name, email,country" +
+                        "select id, name, email, country, role" +
                         " from Users" +
                         " where email=?" +
                         " and password=?" +
@@ -58,11 +58,11 @@ public class LoginServlet extends HttpServlet {
 
                 if(rs != null && rs.next()){
 
-                    User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"));
+                    User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"), rs.getInt("role"));
                     logger.info("User found with details="+user);
                     HttpSession session = request.getSession();
                     session.setAttribute("User", user);
-                    response.sendRedirect("home.jsp");;
+                    response.sendRedirect("welcome.jsp");;
                 }else{
                     RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
                     PrintWriter out= response.getWriter();

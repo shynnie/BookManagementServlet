@@ -242,43 +242,18 @@
     <h1>Manage Users</h1>
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form action="UsersFilter" method="post">
-                <label>Search</label><input type="text" name="search">
-                <h5>(E.g: name, country, email, id...)</h5>
-                <br><br>
-                <input type="submit" value="search" class="btn btn-lg btn-primary">
+            <form action="ProfileEdit" method="post">
+                <%User editProfile = (User) session.getAttribute("profileView");%>
+                <label>Email : </label><input type="text" name="email" value="<%=editProfile.getEmail()%>"><br>
+                <label>Name :</label><input type="text" name="name" value="<%=editProfile.getName()%>"><br>
+                <label>Country :</label><input type="text" name="country" value="<%=editProfile.getCountry()%>"><br>
+                <input type="hidden" name="role" value="<%=editProfile.getRole()%>"><br>
+                <br><br><br>
+                <input type="hidden" name="id" value="<%=user.getId()%>">
+                <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
+
             </form>
-            <br><br>
-
-            <table class="table table-bordered">
-                <tr>
-                    <th><label>ID</label></th>
-                    <th><label>Name</label></th>
-                    <th><label>Country</label></th>
-                    <th><label>Email</label></th>
-                    <th><label>Role</label></th>
-                </tr>
-                <tr>
-                <%ArrayList<User> userArrayList = (ArrayList<User>) session.getAttribute("filterUsers");%>
-                <%if (userArrayList != null) {%>
-                    <% for (int i = 0; i < userArrayList.size(); i++) {%>
-                        <th><%=userArrayList.get(i).getId()%></th>
-                        <th><%=userArrayList.get(i).getName()%></th>
-                        <th><%=userArrayList.get(i).getCountry()%></th>
-                        <th><%=userArrayList.get(i).getEmail()%></th>
-                        <%if (userArrayList.get(i).getRole() == 0) {%>
-                        <th>Admin</th>
-                        <%} else {%>
-                        <th>User</th>
-                        <%}%>
-                    <%}%>
-                <%}%>
-                    <%if (userArrayList != null) userArrayList.clear();%>
-                </tr>
-            </table>
-
         </div>
     </div>
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.shyn.util.User" %><%--
   Created by IntelliJ IDEA.
   User: hung.levanviet
   Date: 5/2/2018
@@ -19,7 +19,8 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <style>
+    <style type="text/css">
+
         /* universal */
 
         body {
@@ -41,7 +42,6 @@
         .center h1 {
             margin-bottom: 10px;
         }
-
 
         /* typography */
 
@@ -71,11 +71,12 @@
         }
 
         /* header */
+
         #logo {
             float: left;
             margin-right: 10px;
             font-size: 1.7em;
-            /*color: #fff;*/
+            color: #fff;
             text-transform: uppercase;
             letter-spacing: -1px;
             padding-top: 9px;
@@ -83,29 +84,159 @@
         }
 
         #logo:hover {
-            /*color: #fff;*/
+            color: #fff;
             text-decoration: none;
         }
-        .content {
-            margin:0px auto;
+
+        /* footer */
+
+        footer {
+            margin-top: 45px;
+            padding-top: 5px;
+            border-top: 1px solid #eaeaea;
+            color: #777;
+        }
+
+        footer a {
+            color: #555;
+        }
+
+        footer a:hover {
+            color: #222;
+        }
+
+        footer small {
+            float: left;
+        }
+
+        footer ul {
+            float: right;
+            list-style: none;
+        }
+
+        footer ul li {
+            float: left;
+            margin-left: 15px;
+        }
+
+        /* miscellaneous */
+
+        .debug_dump {
+            clear: both;
+            float: left;
+            width: 100%;
+            margin-top: 45px;
+        @include box_sizing;
+        }
+
+        /* sidebar */
+
+        aside {
+        section.user_info {
+            margin-top: 20px;
+        }
+        section {
+            padding: 10px 0;
+            margin-top: 20px;
+        &:first-child {
+             border: 0;
+             padding-top: 0;
+         }
+        span {
+            display: block;
+            margin-bottom: 3px;
+            line-height: 1;
+        }
+        h1 {
+            font-size: 1.4em;
+            text-align: left;
+            letter-spacing: -1px;
+            margin-bottom: 3px;
+            margin-top: 0px;
+        }
+        }
+        }
+
+        .gravatar {
+            float: left;
+            margin-right: 10px;
+        }
+
+        .gravatar_edit {
+            margin-top: 15px;
+        }
+
+        /* forms */
+
+        input, textarea, select, .uneditable-input {
+            border: 1px solid #bbb;
+            width: 100%;
+            margin-bottom: 15px;
+        @include box_sizing;
+            font-size: 20px;
+        }
+
+        input {
+            height: auto !important;
+        }
+
+        /* Lable */
+
+        label {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* Table */
+
+        table {
+
         }
     </style>
     <meta charset="UTF-8">
     <title>Login Page</title>
 </head>
 <body>
+    <%--Load User or Customer--%>
+    <%User user = (User) session.getAttribute("User"); %>
+    <%--Load User or Customer--%>
+
     <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container content">
             <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
             <nav>
+                <%if (user != null) {%>
+                    <%if (user.getRole() == 0) {%>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                            <li><a href="profileView.jsp">PROFILE</a> </li>
+                            <li>
+                                <form action="Logout" method="post">
+                                    <input type="submit" value="Logout">
+                                </form>
+                            </li>
+                        </ul>
+                    <%} else {%>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="profileView.jsp">PROFILE</a> </li>
+                            <li>
+                                <form action="Logout" method="post">
+                                    <input type="submit" value="Logout">
+                                </form>
+                            </li>
+                        </ul>
+                    <%}%>
+                <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login.jsp">LOGIN</a> </li>
                     <li><a href="register.jsp">REGISTER</a> </li>
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
                 </ul>
+                <%}%>
             </nav>
         </div>
     </header>
+
     <br><br><br><br><br><br>
 
     <div class="center jumbotron container">
@@ -116,7 +247,9 @@
             <a href="#">Servlet book management</a>
             sample application.
         </h2>
+        <%if (user == null){%>
         <a href="register.jsp" class="btn btn-lg btn-primary">Sign up now!</a>
+        <%}%>
     </div>
 </body>
 </html>

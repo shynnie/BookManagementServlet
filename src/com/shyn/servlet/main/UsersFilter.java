@@ -23,7 +23,7 @@ import java.util.logging.Logger;
 public class UsersFilter extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static Logger logger = Logger.getLogger(String.valueOf(UserInformation.class));
+    static Logger logger = Logger.getLogger(String.valueOf(UsersFilter.class));
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("####################   Initialize UserFilter page");
@@ -57,7 +57,7 @@ public class UsersFilter extends HttpServlet {
                         "OR name = ? " +
                         "OR id = ? " +
                         "OR email = ? " +
-                        "limit 1");
+                        "limit 5");
                 ps.setString(1, country);
                 ps.setString(2, name);
                 ps.setString(3, id);
@@ -67,13 +67,13 @@ public class UsersFilter extends HttpServlet {
 
                 while (rs.next()) {
                     logger.info("Initialize UserFilter query");
-                    User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"));
+                    User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"), rs.getInt("role"));
                     filterUsers.add(user);
                     logger.info("User with details = " +user);
                 }
                 HttpSession session = request.getSession();
                 session.setAttribute("filterUsers", filterUsers);
-                response.sendRedirect("usersfilter2.jsp");
+                response.sendRedirect("usersfilter.jsp");
             }
             catch (Exception e){
                 e.printStackTrace();

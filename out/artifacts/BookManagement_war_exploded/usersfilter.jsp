@@ -1,12 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: hung.levanviet
-  Date: 5/2/2018
-  Time: 2:10 PM
+  Date: 4/23/2018
+  Time: 3:45 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@page import="com.shyn.util.User"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+         pageEncoding="US-ASCII"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <!-- Latest compiled and minified CSS -->
@@ -188,18 +191,50 @@
             padding-bottom: 10px;
             font-size: 20px;
         }
+
+        /* Table */
+
+        table {
+
+        }
     </style>
 </head>
 <body>
+    <%--Load User or Customer--%>
+    <%User user = (User) session.getAttribute("User"); %>
+    <%--Load User or Customer--%>
+
     <header class="navbar navbar-fixed-top navbar-inverse">
         <div class="container content">
             <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
             <nav>
+                <%if (user != null) {%>
+                <%if (user.getRole() == 0) {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%} else {%>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li>
+                        <form action="Logout" method="post">
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+                <%}%>
+                <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="login.jsp">LOGIN</a> </li>
                     <li><a href="register.jsp">REGISTER</a> </li>
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
                 </ul>
+                <%}%>
             </nav>
         </div>
     </header>
@@ -213,7 +248,37 @@
                 <br><br>
                 <input type="submit" value="search" class="btn btn-lg btn-primary">
             </form>
+            <br><br>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th><label>ID</label></th>
+                    <th><label>Name</label></th>
+                    <th><label>Country</label></th>
+                    <th><label>Email</label></th>
+                    <th><label>Role</label></th>
+                </tr>
+                <tr>
+                <%ArrayList<User> userArrayList = (ArrayList<User>) session.getAttribute("filterUsers");%>
+                <%if (userArrayList != null) {%>
+                    <% for (int i = 0; i < userArrayList.size(); i++) {%>
+                        <th><%=userArrayList.get(i).getId()%></th>
+                        <th><%=userArrayList.get(i).getName()%></th>
+                        <th><%=userArrayList.get(i).getCountry()%></th>
+                        <th><%=userArrayList.get(i).getEmail()%></th>
+                        <%if (userArrayList.get(i).getRole() == 0) {%>
+                        <th>Admin</th>
+                        <%} else {%>
+                        <th>User</th>
+                        <%}%>
+                    <%}%>
+                <%}%>
+                    <%if (userArrayList != null) userArrayList.clear();%>
+                </tr>
+            </table>
+
         </div>
     </div>
+
 </body>
 </html>
