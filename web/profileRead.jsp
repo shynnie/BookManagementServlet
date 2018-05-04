@@ -1,17 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
-  User: HP
-  Date: 4/16/2018
-  Time: 10:19 PM
+  User: hung.levanviet
+  Date: 4/23/2018
+  Time: 3:45 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@page import="com.shyn.util.User"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
 <%@ page language="java" contentType="text/html; charset=US-ASCII"
          pageEncoding="US-ASCII"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
 <head>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,20 +21,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+    <meta charset="UTF-8">
+    <title>Profile</title>
     <style type="text/css">
-
-        @import "bootstrap-sprockets";
-        @import "bootstrap";
-
-        /* mixins, variables, etc. */
-
-        $gray-medium-light: #eaeaea;
-
-        @mixin box_sizing {
-            -moz-box-sizing:    border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing:         border-box;
-        }
 
         /* universal */
 
@@ -196,27 +184,18 @@
             height: auto !important;
         }
 
-        #error_explanation {
-            color: red;
-        ul {
-            color: red;
-            margin: 0 0 30px 0;
-        }
-        }
-
-        .field_with_errors {
-        @extend .has-error;
-        .form-control {
-            color: $state-danger-text;
-        }
-        }
-
         /* Lable */
 
         label {
             padding-top: 10px;
             padding-bottom: 10px;
             font-size: 20px;
+        }
+
+        /* Table */
+
+        table {
+
         }
     </style>
 </head>
@@ -232,8 +211,8 @@
                 <%if (user != null) {%>
                 <%if (user.getRole() == 0) {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="manageUsers.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">
@@ -242,7 +221,7 @@
                 </ul>
                 <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">
@@ -260,28 +239,27 @@
         </div>
     </header>
 
-    <div class="col-md-6 col-md-offset-3">
-        <%User user = (User) session.getAttribute("User"); %>
-        <h3>Hi <%=user.getName() %></h3>
-        <strong>Your Email</strong>: <%=user.getEmail() %><br>
-        <strong>Your Country</strong>: <%=user.getCountry() %><br>
-        <br>
+    <h1>Profile</h1>
+    <div class="row">
 
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Country</th>
-            </tr>
-            <tr>
-                <th><%=user.getName()%></th>
-                <th><%=user.getEmail()%></th>
-                <th><%=user.getCountry()%></th>
-            </tr>
-        </table><br><br><br>
+            <div class="col-md-2 col-md-offset-3">
+                <label>Email :</label><br>
+                <label>Name :</label><br>
+                <label>Country :</label><br>
+            </div>
 
-        <form action="Logout" method="post">
-            <input type="submit" value="Logout" class="btn btn-lg btn-primary" >
+            <div class="col-md-6">
+                <label><%=user.getEmail()%></label><br>
+                <label><%=user.getName()%></label><br>
+                <label><%=user.getCountry()%></label><br>
+            </div>
+
+        <form action="/ProfileRead" method="post">
+            <div class="col-md-4 col-md-offset-4">
+                <input type="hidden" name="id" value="<%=user.getId()%>">
+                <br><br><br>
+                <input type="submit" value="Edit Profile" class="btn btn-lg btn-primary">
+            </div>
         </form>
     </div>
 </body>

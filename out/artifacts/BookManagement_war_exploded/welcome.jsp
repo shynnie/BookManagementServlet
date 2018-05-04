@@ -129,43 +129,6 @@
         @include box_sizing;
         }
 
-        /* sidebar */
-
-        aside {
-        section.user_info {
-            margin-top: 20px;
-        }
-        section {
-            padding: 10px 0;
-            margin-top: 20px;
-        &:first-child {
-             border: 0;
-             padding-top: 0;
-         }
-        span {
-            display: block;
-            margin-bottom: 3px;
-            line-height: 1;
-        }
-        h1 {
-            font-size: 1.4em;
-            text-align: left;
-            letter-spacing: -1px;
-            margin-bottom: 3px;
-            margin-top: 0px;
-        }
-        }
-        }
-
-        .gravatar {
-            float: left;
-            margin-right: 10px;
-        }
-
-        .gravatar_edit {
-            margin-top: 15px;
-        }
-
         /* forms */
 
         input, textarea, select, .uneditable-input {
@@ -209,20 +172,25 @@
                 <%if (user != null) {%>
                     <%if (user.getRole() == 0) {%>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
-                            <li><a href="profileView.jsp">PROFILE</a> </li>
+                            <li><a href="manageUsers.jsp">MANAGE USERS</a> </li>
+                            <li><a href="profileRead.jsp">PROFILE</a> </li>
                             <li>
-                                <form action="Logout" method="post">
-                                    <input type="submit" value="Logout">
+                                <form action="Logout" method="post" class="center">
+                                    <input type="submit" value="Logout" class="center">
+                                </form>
+                            </li>
+                            <li>
+                                <form action="/ProfileLoadAll" method="post" class="center">
+                                    <input type="submit" value="MANAGE" class="center">
                                 </form>
                             </li>
                         </ul>
                     <%} else {%>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="profileView.jsp">PROFILE</a> </li>
+                            <li><a href="profileRead.jsp">PROFILE</a> </li>
                             <li>
-                                <form action="Logout" method="post">
-                                    <input type="submit" value="Logout">
+                                <form action="Logout" method="post" class="center">
+                                    <input type="submit" value="Logout" class="center">
                                 </form>
                             </li>
                         </ul>
@@ -237,7 +205,6 @@
         </div>
     </header>
 
-    <br><br><br><br><br><br>
 
     <div class="center jumbotron container">
         <h1>Welcome to the Sample App</h1>

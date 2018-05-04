@@ -22,7 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Manage Users</title>
     <style type="text/css">
 
         /* universal */
@@ -211,8 +211,8 @@
                 <%if (user != null) {%>
                 <%if (user.getRole() == 0) {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="manageUsers.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">
@@ -221,7 +221,7 @@
                 </ul>
                 <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">
@@ -239,36 +239,21 @@
         </div>
     </header>
 
-    <h1>Profile</h1>
+    <h1>Manage Users</h1>
     <div class="row">
-
-            <div class="col-md-2 col-md-offset-3">
-                <label>Email :</label><br>
-                <label>Name :</label><br>
-                <label>Country :</label><br>
-            </div>
-
-        <%--<%User profile = (User) session.getAttribute("profileView"); %>--%>
-        <%--<%if (profile == null) {%>--%>
-            <div class="col-md-6">
-                <label><%=user.getEmail()%></label><br>
-                <label><%=user.getName()%></label><br>
-                <label><%=user.getCountry()%></label><br>
-            </div>
-        <%--<%} else {%>--%>
-            <%--<div class="col-md-6">            <h1>aaaaa</h1>--%>
-                <%--<label><%=profile.getEmail()%></label><br>--%>
-                <%--<label><%=profile.getName()%></label><br>--%>
-                <%--<label><%=profile.getCountry()%></label><br>--%>
-            <%--</div>--%>
-        <%--<%}%>--%>
-        <form action="ProfileView" method="post">
-            <div class="col-md-4 col-md-offset-4">
-                <input type="hidden" name="id" value="<%=user.getId()%>">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="/ProfileUpdate" method="post">
+                <%User editProfile = (User) session.getAttribute("profileView");%>
+                <label>Email : </label><input type="text" name="email" value="<%=editProfile.getEmail()%>"><br>
+                <label>Name :</label><input type="text" name="name" value="<%=editProfile.getName()%>"><br>
+                <label>Country :</label><input type="text" name="country" value="<%=editProfile.getCountry()%>"><br>
+                <input type="hidden" name="role" value="<%=editProfile.getRole()%>"><br>
                 <br><br><br>
-                <input type="submit" value="Edit Profile" class="btn btn-lg btn-primary">
-            </div>
-        </form>
+                <input type="hidden" name="id" value="<%=user.getId()%>">
+                <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
+
+            </form>
+        </div>
     </div>
 </body>
 </html>

@@ -200,60 +200,60 @@
     </style>
 </head>
 <body>
-    <%--Load User or Customer--%>
-    <%User user = (User) session.getAttribute("User"); %>
-    <%--Load User or Customer--%>
+<%--Load User or Customer--%>
+<%User user = (User) session.getAttribute("User"); %>
+<%--Load User or Customer--%>
 
-    <header class="navbar navbar-fixed-top navbar-inverse">
-        <div class="container content">
-            <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
-            <nav>
-                <%if (user != null) {%>
-                <%if (user.getRole() == 0) {%>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
-                    <li>
-                        <form action="Logout" method="post">
-                            <input type="submit" value="Logout">
-                        </form>
-                    </li>
-                </ul>
-                <%} else {%>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
-                    <li>
-                        <form action="Logout" method="post">
-                            <input type="submit" value="Logout">
-                        </form>
-                    </li>
-                </ul>
-                <%}%>
-                <%} else {%>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.jsp">LOGIN</a> </li>
-                    <li><a href="register.jsp">REGISTER</a> </li>
-                </ul>
-                <%}%>
-            </nav>
-        </div>
-    </header>
-
-    <h1>Manage Users</h1>
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form action="ProfileEdit" method="post">
-                <%User editProfile = (User) session.getAttribute("profileView");%>
-                <label>Email : </label><input type="text" name="email" value="<%=editProfile.getEmail()%>"><br>
-                <label>Name :</label><input type="text" name="name" value="<%=editProfile.getName()%>"><br>
-                <label>Country :</label><input type="text" name="country" value="<%=editProfile.getCountry()%>"><br>
-                <input type="hidden" name="role" value="<%=editProfile.getRole()%>"><br>
-                <br><br><br>
-                <input type="hidden" name="id" value="<%=user.getId()%>">
-                <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
-
-            </form>
-        </div>
+<header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container content">
+        <a href="welcome.jsp" id="logo">BOOK MANAGEMENT</a>
+        <nav>
+            <%if (user != null) {%>
+            <%if (user.getRole() == 0) {%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="manageUsers.jsp">MANAGE USERS</a> </li>
+                <li><a href="profileRead.jsp">PROFILE</a> </li>
+                <li>
+                    <form action="Logout" method="post">
+                        <input type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+            <%} else {%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="profileRead.jsp">PROFILE</a> </li>
+                <li>
+                    <form action="Logout" method="post">
+                        <input type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+            <%}%>
+            <%} else {%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.jsp">LOGIN</a> </li>
+                <li><a href="register.jsp">REGISTER</a> </li>
+            </ul>
+            <%}%>
+        </nav>
     </div>
+</header>
+
+<h1>Manage Users</h1>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <form action="ProfileEdit" method="post">
+            <%User editProfile = (User) session.getAttribute("profileView");%>
+            <label>Email : </label><input type="text" name="email" value="email"><br>
+            <label>Name :</label><input type="text" name="name" value="name"><br>
+            <label>Country :</label><input type="text" name="country" value="country"><br>
+            <input type="hidden" name="role" value=""><br>
+            <br><br><br>
+            <input type="hidden" name="id" value="<%=user.getId()%>">
+            <input type="submit" value="Confirm" class="btn btn-lg btn-primary">
+
+        </form>
+    </div>
+</div>
 </body>
 </html>

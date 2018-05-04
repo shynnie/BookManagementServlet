@@ -1,61 +1,63 @@
 package com.shyn.servlet.main;
 
-import com.shyn.util.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-@WebServlet(name = "ProfileView", urlPatterns = { "/ProfileView" })
-public class ProfileView extends HttpServlet {
+@WebServlet(name = "ProfileUpdate", urlPatterns = { "/ProfileUpdate" })
+public class ProfileUpdate extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static Logger logger = Logger.getLogger(String.valueOf(ProfileView.class));
+    static Logger logger = Logger.getLogger(String.valueOf(ProfileUpdate.class));
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("####################   Initialize Profile View page");
+        System.out.println("####################   Initialize ProfileUpdate page");
         Connection con = (Connection) getServletContext().getAttribute("DBConnection");
 
+        String country = request.getParameter("country");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
         String id = request.getParameter("id");
-        logger.info("id :::: " +id);
+        String role = request.getParameter("role");
+
         //Create new Query
         PreparedStatement ps = null;
-        ResultSet rs = null;
+
         try {
             ps = con.prepareStatement("" +
-                    "SELECT id, name, email, country, role " +
-                    "FROM users " +
+                    "UPDATE users " +
+                    "SET country = ?, " +
+                    "name = ?, " +
+                    "email = ?, " +
+                    "role = ? " +
                     "WHERE id = ?");
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-
-            while(rs.next()){
-                User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"), rs.getInt("role"));
-                logger.info("User found with details = "+user);
-                HttpSession session = request.getSession();
-                session.setAttribute("profileView", user);
-                response.sendRedirect("profileEdit.jsp");;
-                logger.info("session profileView :::" + session);
+            ps.setString(1, country);
+            ps.setString(2, name);
+            ps.setString(3, email);
+            ps.setString(4, role);
+            ps.setString(5, id);
+            logger.info("ps ::::" + ps);
+            int i = ps.executeUpdate();
+            if (i > 0){
+                response.sendRedirect("welcome.jsp");
             }
+
             //Create new Query
-
-
+            logger.info("Complete");
+            
         } catch (SQLException e) {
             e.printStackTrace();
             logger.info("Database connection problem");
             throw new ServletException("DB Connection problem.");
         }finally{
             try {
-                rs.close();
                 ps.close();
             } catch (SQLException e) {
                 logger.info("SQLException in closing PreparedStatement or ResultSet");;

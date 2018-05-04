@@ -202,8 +202,8 @@
                 <%if (user != null) {%>
                 <%if (user.getRole() == 0) {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="usersfilter.jsp">MANAGE USERS</a> </li>
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="manageUsers.jsp">MANAGE USERS</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">
@@ -212,7 +212,7 @@
                 </ul>
                 <%} else {%>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="profileView.jsp">PROFILE</a> </li>
+                    <li><a href="profileRead.jsp">PROFILE</a> </li>
                     <li>
                         <form action="Logout" method="post">
                             <input type="submit" value="Logout">

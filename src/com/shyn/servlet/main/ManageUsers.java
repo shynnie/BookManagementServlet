@@ -19,11 +19,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-@WebServlet(name = "UsersFilter", urlPatterns = "/UsersFilter" )
-public class UsersFilter extends HttpServlet {
+@WebServlet(name = "ManageUsers", urlPatterns = "/ManageUsers" )
+public class ManageUsers extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static Logger logger = Logger.getLogger(String.valueOf(UsersFilter.class));
+    static Logger logger = Logger.getLogger(String.valueOf(ManageUsers.class));
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("####################   Initialize UserFilter page");
@@ -39,7 +39,7 @@ public class UsersFilter extends HttpServlet {
         }
 
         if (errorMsg != null) {
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/usersfilter.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/manageUsers.jsp");
             PrintWriter out = response.getWriter();
             out.println("<font color = red>" + errorMsg + "</font>");
             rd.include(request, response);
@@ -56,24 +56,23 @@ public class UsersFilter extends HttpServlet {
                         "WHERE country = ? " +
                         "OR name = ? " +
                         "OR id = ? " +
-                        "OR email = ? " +
-                        "limit 5");
+                        "OR email = ? ");
                 ps.setString(1, country);
                 ps.setString(2, name);
                 ps.setString(3, id);
                 ps.setString(4, email);
                 rs = ps.executeQuery();
-                ArrayList<User> filterUsers = new ArrayList<>();
+                ArrayList<User> manageUsers = new ArrayList<>();
 
                 while (rs.next()) {
                     logger.info("Initialize UserFilter query");
                     User user = new User(rs.getString("name"), rs.getString("email"), rs.getString("country"), rs.getInt("id"), rs.getInt("role"));
-                    filterUsers.add(user);
+                    manageUsers.add(user);
                     logger.info("User with details = " +user);
                 }
                 HttpSession session = request.getSession();
-                session.setAttribute("filterUsers", filterUsers);
-                response.sendRedirect("usersfilter.jsp");
+                session.setAttribute("manageUsers", manageUsers);
+                response.sendRedirect("manageUsers.jsp");
             }
             catch (Exception e){
                 e.printStackTrace();
